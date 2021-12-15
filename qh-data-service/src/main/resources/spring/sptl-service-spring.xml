@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <!-- 引入属性文件 -->
+    <!--部署环境-->
+    <!--开发环境-->
+    <!--<context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />-->
+
+    <!-- 自动扫描(自动注入) -->
+    <context:component-scan base-package="com.asiainfo.qh.*"/>
+    <!-- 开启注解 -->
+    <context:annotation-config />
+
+
+
+    <!-- 一、使用数据库连接池注册数据源,引入相关的配置文件 -->
+    <!-- -->
+    <import resource="druid.xml"/>
+
+    <!-- 二、创建mybatis会话工厂 -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+        <!--<property name="configLocation" value="file:#{systemProperties['mybatis.config.path']}/mybatis-config.xml"></property>-->
+        <!--<property name="mapperLocations" value="classpath*:mapper/**/*Mapper.xml"></property>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash;扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开&ndash;&gt;-->
+        <!--<property name="basePackage" value="com.asiainfo.qh.qhdataservice.mapper" />-->
+        <!--&lt;!&ndash;这里不用sqlSessionFactory是因为如果用会导致上面配置的dataSource失效&ndash;&gt;-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 三、创建mybatis会话template &ndash;&gt;-->
+    <!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+        <!--<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>-->
+    <!--</bean>-->
+
+    <bean id="jdbcTemplate_oracle" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource_oracle"/>
+    </bean>
+
+    <!--<bean id="jdbcTemplate_db2" class="org.springframework.jdbc.core.JdbcTemplate">-->
+        <!--<property name="dataSource" ref="dataSource_db2"/>-->
+    <!--</bean>-->
+
+</beans>

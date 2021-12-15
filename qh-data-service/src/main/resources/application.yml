@@ -1,0 +1,24 @@
+server:
+    port: 8881
+    servlet:
+      context-path: /DataService0.01
+logging:
+    level:
+        com.asiainfo.qh.qhdataservice: debug
+spring:
+    http:
+         encoding:
+              charset: UTF-8
+              enabled: true
+              force: true
+    datasource_oracle:
+            driver-class-name: oracle.jdbc.driver.OracleDriver
+            url: jdbc:oracle:thin:@135.191.120.144:1521/chlmgrdb
+            username: ucr_chan_gridsop
+            password: chlmgrdb_2019
+            pool:
+                 initial-size: 2
+                 min-idle: 2
+                 max-active: 512
+                 max-wait: 1000
+
